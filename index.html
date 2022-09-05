@@ -16,7 +16,7 @@
                                 <a href="#cam-iframe">Guarda la webcam</a>
                                 <a href="#prevision-iframe">Guarda le previsioni</a>
                         </div>
-                </div>
+                </div>  
 
                
 
@@ -25,9 +25,11 @@
 
          <div class="container">
             <div class="content">
-                    <iframe  class="data" id="cam-iframe" src="http://vanzameteo.altervista.org/foicam/visualizzawebcam.php?codice=294e31d58d34c6b8" width="750" height="700" frameborder="0"></iframe>
-                    <iframe class="data" id=""  src="https://www.weatherlink.com/embeddablePage/show/22dbf85eddc44e528f616c5fcf770597/wide" width="520" height="550" frameborder="0"></iframe>
-                    <iframe class="data" id="prevision-iframe" src="http://www.meteoindiretta.it/script_meteo_localita.php?lid=6203" width="670"  height="400"  marginheight="0" marginwidth="0" scrolling="no" noresize="noresize" frameborder="0"></iframe>
+               <div class="vanza-data">
+                  <iframe  class="data" id="cam-iframe" src="http://vanzameteo.altervista.org/foicam/visualizzawebcam.php?codice=294e31d58d34c6b8" width="750" height="700" frameborder="0"></iframe>
+                  <iframe class="data" id="statio-data-iframe" src="https://www.weatherlink.com/embeddablePage/show/22dbf85eddc44e528f616c5fcf770597/wide" width="520" height="550" frameborder="0"  marginheight="0" marginwidth="0"></iframe>
+               </div>
+               <iframe class="data" id="prevision-iframe" src="http://www.meteoindiretta.it/script_meteo_localita.php?lid=6203" width="670"  height="400"  marginheight="0" marginwidth="0" scrolling="no" noresize="noresize" frameborder="0"></iframe>
             </div>
          </div>
          <div class="footer">

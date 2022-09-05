@@ -18,12 +18,11 @@ body{
 .cover{
         display: flex;
         flex-direction: column;
-        background: linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,.6)) ,url('./Trambileno_-_Santuario_Madonna_de_la_Salette.jpg');
+        background: linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,.6)) ,url('./images/Trambileno_-_Santuario_Madonna_de_la_Salette.jpg');
         background-size:cover;
         background-repeat: no-repeat;
         height: 100vh;
         width: 100%;
-        border-bottom: 5px yellow solid;
         justify-content: center;
         text-align: center;
 }
@@ -64,15 +63,29 @@ body{
 .content{
         display: flex;
         flex-direction: column;
-        align-items: center;
-        width: fit-content;
         margin: 0 auto;
 
+        align-items: center;
+}
+
+.vanza-data{
+        display: flex;
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        align-items: baseline;
 }
 
 .data{
-        border: 1px solid red;
+        margin: 20px 0;
+        transition: 1s;
 }
+
+.data:hover{
+        transform: scale(1.03);
+}
+
+
 
 .footer{
         display: flex;
@@ -97,7 +110,10 @@ body{
 }
 
 
-@media (max-width: 500px){
+@media (max-width: 768px){
+        body{
+               
+        }
         .data-links{
                 flex-direction: column;
                 gap: 30px;
