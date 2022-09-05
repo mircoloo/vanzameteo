@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+
+*{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+}
+
+body{
+        font-family: 'Poppins';
+
+}
+
+.container{
+      margin: 0 auto;
+}
+
+.cover{
+        display: flex;
+        flex-direction: column;
+        background: linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,.6)) ,url('./Trambileno_-_Santuario_Madonna_de_la_Salette.jpg');
+        background-size:cover;
+        background-repeat: no-repeat;
+        height: 100vh;
+        width: 100%;
+        border-bottom: 5px yellow solid;
+        justify-content: center;
+        text-align: center;
+}
+
+
+
+.hero-title{
+        font-size: 50px;
+        color: white;
+        background-color: rgba(0,0,0,.2);
+}
+
+.data-links{
+        display: flex;
+        border: 1px red solid;
+        align-items: flex-end;
+
+}
+
+
+.data-links a{
+        display: block;
+        width: fit-content;
+        text-decoration: none;
+        background-color: yellow;
+        padding: .3rem .6rem;
+        color: black;
+        border-radius: .3rem;    
+}
+
+.data-links a:hover{
+        animation: stretch 1s infinite;
+
+}
+
+
+.content{
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: fit-content;
+        margin: 0 auto;
+
+}
+
+.data{
+        border: 50px;
+}
+
+.footer{
+        display: flex;
+        background-color: black;
+        height: 80px;
+        color: white;
+        align-items: center;
+        justify-content: center;
+}
+
+
+@keyframes stretch {
+        25%{
+                transform: scale(1.05);
+        }
+        50%{
+                transform: scale(1.05);
+        }
+        100%{
+                transform: scale(1);
+        }
+}
+
+@media screen (max-width: 768px){
+        .hero-title{
+                font-size: 100px;
+        }
+
+        .data-links{
+                margin-top: 100px;
+                flex-direction: column;
+                align-items: center;
+        }
+
+        .hero a{
+                margin: 100px 0;
+                transform: scale(3);
+                animation:both;
+        }
+}
