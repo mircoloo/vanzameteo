@@ -25,14 +25,22 @@ body{
         width: 100%;
         justify-content: center;
         text-align: center;
+        background-position: 0 4%;
+        border-bottom: 7px yellow solid;
 }
 
 
 
 .hero-title{
+        position: sticky;
+        top: 0;
+        width: 100%;
         font-size: 50px;
+        margin: 20px 0;
         color: white;
-        background-color: rgba(0,0,0,.2);
+        background-color: rgba(0,0,0,.4);
+        text-align: center;
+        z-index: 1;
 }
 
 .data-links{
@@ -40,7 +48,6 @@ body{
         display: flex;
         align-items: center;
         justify-content: space-around;
-
 }
 
 
@@ -59,14 +66,52 @@ body{
 
 }
 
+.infos{
+        margin-top: 20px;
+}
+
+.left, .right{
+        display: flex;
+        height: 50vh;
+        width: 100%;
+}
+
+.right{
+        justify-content: end;
+}
+
+.section{
+        height: 50vh;
+        width: 50%;
+}
+
+
+.left .section{
+        border-radius: 0 50px 50px 0;
+        background: linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,.6)) ,url('./images/forte-pozzacchio.jpg');
+        background-size:cover;
+        background-repeat: no-repeat;
+}
+
+
+.right .section{
+        border-radius: 50px 0 0 50px;
+        background: linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,.6)) ,url('./images/eremo-san-colombano.jpg');
+        background-size:cover;
+        background-repeat: no-repeat;
+}
+
+
+
+
 
 .content{
         display: flex;
         flex-direction: column;
         margin: 0 auto;
-
         align-items: center;
 }
+
 
 .vanza-data{
         display: flex;
@@ -89,6 +134,7 @@ body{
 
 .footer{
         display: flex;
+        border-top: 7px yellow solid;
         background-color: black;
         height: 80px;
         color: white;
@@ -112,7 +158,7 @@ body{
 
 @media (max-width: 768px){
         body{
-               
+              background-color: aqua; 
         }
         .data-links{
                 flex-direction: column;
