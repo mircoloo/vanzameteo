@@ -2,6 +2,8 @@
    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
    <head>
+
+      <meta name="viewport" content="width=device-width, maximum-scale=1.0, initial-scale=1.0">
       <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
       <title>Webcam Trambileno</title>
       <link rel="stylesheet" href="./style.css">
@@ -25,9 +27,7 @@
                   <div class="right">
                      <div class="section"></div>
                   </div>
-                  <div class="left">
-                     <div class="section"></div>
-                  </div>
+                  
                 </div>
                         
                </div>
@@ -35,10 +35,15 @@
             <div class="content">
                <h1 class="hero-title">Webcam</h1>
                <div class="vanza-data">
-                  <iframe  class="data" id="cam-iframe" src="http://vanzameteo.altervista.org/foicam/visualizzawebcam.php?codice=294e31d58d34c6b8" width="750" height="700" frameborder="0"></iframe>
-                  <iframe class="data" id="statio-data-iframe" src="https://www.weatherlink.com/embeddablePage/show/22dbf85eddc44e528f616c5fcf770597/wide" width="520" height="550" frameborder="0"  marginheight="0" marginwidth="0"></iframe>
+                  
+                     <iframe  class="data" id="cam-iframe" src="http://vanzameteo.altervista.org/foicam/visualizzawebcam.php?codice=294e31d58d34c6b8" width="750" height="700" frameborder="0"></iframe>
+                                   
+                     <iframe class="data" id="statio-data-iframe" src="https://www.weatherlink.com/embeddablePage/show/22dbf85eddc44e528f616c5fcf770597/wide" width="520" height="550" frameborder="0"  marginheight="0" marginwidth="0"></iframe>
+               
                </div>
-               <iframe class="data" id="prevision-iframe" src="http://www.meteoindiretta.it/script_meteo_localita.php?lid=6203" width="670"  height="400"  marginheight="0" marginwidth="0" scrolling="no" noresize="noresize" frameborder="0"></iframe>
+               
+                  <iframe class="data" id="prevision-iframe" src="http://www.meteoindiretta.it/script_meteo_localita.php?lid=6203" width="670"  height="400"  marginheight="0" marginwidth="0" scrolling="no" noresize="noresize" frameborder="0"></iframe>
+            
             </div>
             <div class="footer">
                 <h3>Fulvio Bisoffi - Vanza, Trambileno ©</h3>
@@ -46,5 +51,28 @@
          </div>
          
       </div>
+      
    </body>
+   <script type="application/javascript">
+
+      function resizeIFrameToFitContent( iFrame ) {
+      
+          iFrame.width  = iFrame.contentWindow.document.body.scrollWidth;
+          iFrame.height = iFrame.contentWindow.document.body.scrollHeight;
+      }
+      
+      window.addEventListener('DOMContentLoaded', function(e) {
+      
+          var iFrame = document.getElementById( 'iFrame1' );
+          resizeIFrameToFitContent( iFrame );
+      
+          // or, to resize all iframes:
+          var iframes = document.querySelectorAll("iframe");
+          for( var i = 0; i < iframes.length; i++) {
+              resizeIFrameToFitContent( iframes[i] );
+              console.log(iFrames[i])
+          }
+      } );
+      
+      </script>
 </html>
