@@ -1,0 +1,7 @@
+{
+    "objectscript.conn": {
+        "server": "itvv-test-tc",
+        "ns": "USER",
+        "active": true
+    }
+}

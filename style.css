@@ -13,17 +13,16 @@
 }
 
 
-
-
 body {
-    font-family: 'Poppins';font-size: 22px;
+    font-family: 'Poppins';
     background-color: var(--backgroundColor)
 }
 
-.section{
-  position: relative;
-  height: 100vh;
+.container{
+ background-color: aqua;
 }
+
+
 
 
 /* =========== TOOLBAR ============*/
@@ -32,44 +31,43 @@ body {
     width: 100%;
     min-height: 100px;
     background-color: var(--primaryColor);
-    position: sticky;
+   
 }
 
 .toolbar{
-  display: flex;
-  align-items: center;
+  margin-bottom: 50px;
 }
 
+.footer{
+  margin-top: 50px;
+}
 .title{
   margin-left: 20px;
 }
 
 /*============== CONTENT ================*/
+.content{
+  
+  background-color: red;
+  
+  
+}
 
-
-.webcam-section{
-  margin: 40px;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.section{
+  height: 100vh;
 }
 
 
-/*=========SECTION TITLES================*/
+
+/*=========SECTION TITLES===========*/
 
 .section-title{
   color: var(--backgroundColor);
 }
-
-  
-}
-
   /* ==IFRAMES== */
 
   .iframe-container{
     padding-bottom: 56.25%; 
-    position:relative; 
     display:block; 
     width: 100%;
   }
@@ -92,50 +90,56 @@ body {
   }
 
   .button:hover{
-    
     background-color: var(--primaryColor);
-    
   }
 
 
-  /*==================>GOOGLE MAP==========*/
-
-  /* Set the size of the div element that contains the map */
+  /*===============GOOGLE MAPS==========*/
+  
 #map {
-  height: 400px; /* The height is 400 pixels */
+  height: 100vh; /* The height is 400 pixels */
   width: 100%; /* The width is the width of the web page */
-}
-
-.cover-iframe{
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-  z-index: -1;
-  height: 100px;
-  background-color: var(--backgroundColor);
 }
 
 
 /*======= TESTS ========*/
 
 .bubble{
-  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 300px;
-  width: 300px;
+  height: 500px;
+  width: 500px;
   background-color: rgb(244, 197, 5);
-  z-index: 2;
-  left: 50px;
-  top: 500px;  
+  z-index: 0;  
 }
+
+.bubble-left{
+ 
+  left: 50px;
+  bottom: 0px;  
+}
+
+.bubble-right{
+ 
+  right: 50px;
+  bottom: 0px;  
+}
+
+
+
+
 
 .bubble {
   border-radius: 250px 750px 250px 750px /
                  750px 250px 750px 250px;
   animation: wobble 10s ease-in-out alternate infinite;
 }
+
+
+
+
+
 
 @keyframes wobble {
   50% {
@@ -148,3 +152,18 @@ body {
   }
 }
 
+
+
+@media only screen and (max-width: 600px) {
+  #map{width: 100%;}
+  .bubble{
+    visibility: hidden;
+  }
+  
+  .content{
+    flex-direction: column;
+  }
+  .section{
+    flex-direction: column;
+  }
+}

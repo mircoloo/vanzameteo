@@ -1,74 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
-    <link rel="shortcut icon" href="images/favicon.ico"/>
-    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="shortcut icon" href="images/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins"
+      rel="stylesheet"
+    />
     <title>Vanzameteo</title>
-</head>
-<body>
-
+  </head>
+  <body>
     <div class="container">
-        <div class="bubble"><h3 class="section-title">Webcam</h3></div>
-        
-        <div class="toolbar">
-            <h1 class="title">Vanzameteo</h1>
-            <!-- 
-            <a href="#">Home</a>
-            <a href="#">More</a>
-            <a href="#">About</a>
- -->
+      <div class="toolbar">
+        <h1 class="title">Vanzameteo</h1>
+      </div>
+
+      <div class="content">
+
+        <div class="section">
+          <!-- <div class="bubble bubble-left"><h3 class="section-title">Webcam</h3></div> -->
+            
+          <div class="iframe-container">
+              <iframe src="http://vanzameteo.altervista.org/foicam/visualizzawebcam.php?codice=294e31d58d34c6b8" frameborder="0" allowfullscreen="1" style="position: absolute; top: 0; left: 0"></iframe>
+          </div>
+          <a class="button" href="https://meteonetwork.eu/it/weather-station/trn053-stazione-meteorologica-di-vanza">More Info</a>
         </div>
 
-        <div class="content">
-            
-            <div class="section webcam-section">
-                <h1 class="section-title">Webcam</h1>
-                <div class="cover-iframe"></div>
+        <div class="section">
+          <!-- <div class="bubble bubble-right"><h3 class="section-title">Mappa</h3></div> -->
+          <div id="map"></div>
+        </div>
 
-                <div class="iframe-container">
-                    <iframe 
-                      src="http://vanzameteo.altervista.org/foicam/visualizzawebcam.php?codice=294e31d58d34c6b8"
-                      frameborder="0" allowfullscreen="" style="position:absolute; top:0; left: 0">
-                    </iframe>
-                </div>
-                
-
-                <a class="button" href="https://meteonetwork.eu/it/weather-station/trn053-stazione-meteorologica-di-vanza">More Info</a>
-            </div>
-            <div class="section">
-                <div class="bubble"><h3 class="section-title">Mappa</h3></div>
-        
-                <div id="map"></div>
-            </div>
-            
-            <!-- <div class="bubble"></div>
+        <!-- <div class="bubble"></div>
             <div style="padding-bottom: 56.25%; position:relative; display:block; width: 100%">
                 <iframe width="100%" height="100%"
                   src="http://www.meteoindiretta.it/script_meteo_localita.php?lid=6203"
                   frameborder="0" allowfullscreen="" style="position:absolute; top:0; left: 0">
                 </iframe>
               </div> -->
+      </div>
 
-        </div>
-        
-        
+      <div class="footer">Mirco Bisoffi</div>
 
-        <div class="footer">
-
-        </div>
+      
     </div>
-    
-    
+
     <!-- AIzaSyCBOmye5VMtg3S4xxHJRo95OH0aM8CgOwg -->
     <script src="index.js"></script>
     <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBOmye5VMtg3S4xxHJRo95OH0aM8CgOwg&callback=initMap&v=weekly"
-    defer
-   
-  ></script>
-</body>
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBOmye5VMtg3S4xxHJRo95OH0aM8CgOwg&callback=initMap&v=weekly"
+      defer
+    ></script>
+  </body>
 </html>
