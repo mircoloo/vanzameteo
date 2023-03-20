@@ -1,58 +1,74 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-   <head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="shortcut icon" href="images/favicon.ico"/>
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <title>Vanzameteo</title>
+</head>
+<body>
 
-      <meta name="viewport" content="width=device-width, maximum-scale=1.0, initial-scale=1.0">
-      <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-      <title>Webcam Trambileno</title>
-      <link rel="stylesheet" href="./style.css">
-   </head>
-   <body>
-      <div class="container">
+    <div class="container">
+        <div class="bubble"><h3 class="section-title">Webcam</h3></div>
+        
+        <div class="toolbar">
+            <h1 class="title">Vanzameteo</h1>
+            <!-- 
+            <a href="#">Home</a>
+            <a href="#">More</a>
+            <a href="#">About</a>
+ -->
+        </div>
 
-        <div class="hero">
-                <div class="cover">
-                        <h1 class="hero-title">Trambileno</h1>
-                        <div class="data-links">
-                                <a href="#cam-iframe">Guarda la webcam</a>
-                                <a href="#prevision-iframe">Guarda le previsioni</a>
-                        </div>
-                </div>
-                <div class="infos">
-                  <h1 class="hero-title">Il territorio</h1>
-                  <div class="left">
-                     <div class="section"></div>
-                  </div>
-                  <div class="right">
-                     <div class="section"></div>
-                  </div>
-                  
-                </div>
-                        
-               </div>
-
-            <div class="content">
-               <h1 class="hero-title">Webcam</h1>
-               <div class="vanza-data">
-                  <div class="iframe-wrapper">
-                     <iframe  class="data responsive-iframe" id="cam-iframe" src="http://vanzameteo.altervista.org/foicam/visualizzawebcam.php?codice=294e31d58d34c6b8" width="750" height="700" frameborder="0"></iframe>
-                  </div>
-                                   
-                     <iframe class="data" id="statio-data-iframe" src="https://www.weatherlink.com/embeddablePage/show/22dbf85eddc44e528f616c5fcf770597/wide" width="520" height="550" frameborder="0"  marginheight="0" marginwidth="0"></iframe>
-               
-               </div>
-               
-                  <iframe class="data" id="prevision-iframe" src="http://www.meteoindiretta.it/script_meteo_localita.php?lid=6203" width="670"  height="400"  marginheight="0" marginwidth="0" scrolling="no" noresize="noresize" frameborder="0"></iframe>
+        <div class="content">
             
+            <div class="section webcam-section">
+                <h1 class="section-title">Webcam</h1>
+                <div class="cover-iframe"></div>
+
+                <div class="iframe-container">
+                    <iframe 
+                      src="http://vanzameteo.altervista.org/foicam/visualizzawebcam.php?codice=294e31d58d34c6b8"
+                      frameborder="0" allowfullscreen="" style="position:absolute; top:0; left: 0">
+                    </iframe>
+                </div>
+                
+
+                <a class="button" href="https://meteonetwork.eu/it/weather-station/trn053-stazione-meteorologica-di-vanza">More Info</a>
             </div>
-            <div class="footer">
-                <h3>Fulvio Bisoffi - Vanza, Trambileno ©</h3>
-         </div>
-         </div>
-         
-      </div>
-      
-   </body>
-  
+            <div class="section">
+                <div class="bubble"><h3 class="section-title">Mappa</h3></div>
+        
+                <div id="map"></div>
+            </div>
+            
+            <!-- <div class="bubble"></div>
+            <div style="padding-bottom: 56.25%; position:relative; display:block; width: 100%">
+                <iframe width="100%" height="100%"
+                  src="http://www.meteoindiretta.it/script_meteo_localita.php?lid=6203"
+                  frameborder="0" allowfullscreen="" style="position:absolute; top:0; left: 0">
+                </iframe>
+              </div> -->
+
+        </div>
+        
+        
+
+        <div class="footer">
+
+        </div>
+    </div>
+    
+    
+    <!-- AIzaSyCBOmye5VMtg3S4xxHJRo95OH0aM8CgOwg -->
+    <script src="index.js"></script>
+    <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBOmye5VMtg3S4xxHJRo95OH0aM8CgOwg&callback=initMap&v=weekly"
+    defer
+   
+  ></script>
+</body>
 </html>
