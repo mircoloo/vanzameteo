@@ -1,124 +1,84 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+
 *{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    
+    
+    /* =================== VARIABLES ================  */
+    :root{
+      --primaryColor:rgb(244, 197, 5);
+      --backgroundColor:rgb(40, 40, 43); 
+    }
+    
+body{
+        font-family: 'Poppins';
+        background-color: var(--backgroundColor);
 
-
-
-/* =================== VARIABLES ================  */
-:root{
-  --primaryColor:rgb(244, 197, 5);
-  --backgroundColor:rgb(40, 40, 43); 
-}
-
-
-body {
-    font-family: 'Poppins';
-    background-color: var(--backgroundColor)
 }
 
 .container{
- background-color: aqua;
+        margin: 0 auto;
+        position: relative;
+        width: 100%;
 }
 
-
-
-
-/* =========== TOOLBAR ============*/
-
-.toolbar, .footer{
-    background-color: var(--primaryColor);
-}
-
-.toolbar{
-  margin-bottom: 50px;
-}
-
-.footer{
-  margin-top: 50px;
-}
-.title{
-  margin-left: 20px;
-}
-
-/*============== CONTENT ================*/
-.content{
-  
-  background-color: red;
-  
-  
-}
 
 .section{
-  height: 100vh;
+        height: 100vh;
 }
 
 
-
-/*=========SECTION TITLES===========*/
-
-.section-title{
-  color: var(--backgroundColor);
+.hero-title{
+        position: sticky;
+        top: 0;
+        width: 100%;
+        font-size: 50px;
+        margin: 20px 0;
+        color: white;
+        background-color: rgba(0,0,0,.4);
+        text-align: center;
+        z-index: 1;
 }
-  /* ==IFRAMES== */
 
-  /* ========== BUTTONS ==============*/
-
-  .button{
-    text-decoration: none;
-    background-color: var(--primaryColor) ;
-    padding: .5rem 1.2rem;
-    color: black;
-    text-transform:uppercase;
-    border-radius: .5rem;
-  }
-
-  .button:hover{
-    background-color: var(--primaryColor);
-  }
+   /* ======================= IFRAMES ====================== */
 
 
-  /*===============GOOGLE MAPS==========*/
-  
+.iframe-container {
+        height:  100%;
+        height: auto;
+        overflow:  auto;
+}
+
+iframe{
+        margin: 2rem 0;
+}
+
 #map {
-  height: 100vh; /* The height is 400 pixels */
-  width: 100%; /* The width is the width of the web page */
+        height: 400px; /* The height is 400 pixels */
+        width: 100%; /* The width is the width of the web page */
+      }
+
+
+/* ===== BUTTON =====*/
+
+.button{
+        background-color: var(--primaryColor);
 }
 
 
-/*======= TESTS ========*/
-
-.bubble{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 500px;
-  width: 500px;
-  background-color: rgb(244, 197, 5);
-  z-index: 0;  
-}
-
-.bubble-left{
- 
-  left: 50px;
-  bottom: 0px;  
-}
-
-.bubble-right{
- 
-  right: 50px;
-  bottom: 0px;  
-}
-
-
-
-
-
-.bubble {
-  border-radius: 250px 750px 250px 750px /
-                 750px 250px 750px 250px;
-  animation: wobble 10s ease-in-out alternate infinite;
+  /* ======================= FOOTER / TOOLBAR ====================== */
+.footer, .toolbar{
+        display: flex;
+        border-top: 7px yellow solid;
+        background-color: var(--primaryColor);
+        height: 80px;
+        color: white;
+        align-items: center;
+        justify-content: center;
 }
 
 
@@ -126,19 +86,11 @@ body {
 
 
 
-@keyframes wobble {
-  50% {
-    border-radius: 750px 550px 350px 750px /
-                   350px 750px 550px 450px;
-  }
-  100% {
-    border-radius: 750px 250px 750px 250px /
-                   250px 750px 250px 750px;
-  }
-}
+  /* ======================= MEDIA QUERIES ====================== */
 
+@media only screen and (max-width: 600px){
+      
+     
+        
 
-
-@media only screen and (max-width: 600px) {
-  
 }

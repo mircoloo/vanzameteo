@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+   <!--  <link rel="stylesheet" href="./style2.css" /> -->
+    <link rel="shortcut icon" href="images/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins"
+      rel="stylesheet"
+    />
+    <title>Vanzameteo</title>
+  </head>
+  <body onresize="onResize()">
+    
+    <div class="container">
+      <div class="toolbar">
+        <h1 class="title">Vanzameteo</h1>
+      </div>
+
+     <div class="content">
+
+        <div class="section webcam-section">
+          <div id="cam-iframe" style="padding-bottom: 56.25%; position:relative; display:block; width: 100%">
+            <iframe width="100%" height="100%"
+              src="http://vanzameteo.altervista.org/foicam/visualizzawebcam.php?codice=294e31d58d34c6b8"
+              frameborder="0" allowfullscreen="" style="position:absolute; top:0; left: 0">
+            </iframe>
+          </div>
+        </div>
+ 
+        <div class="section">
+          
+          <div id="map"></div>
+        </div>
+
+    
+      </div>
+
+      <div class="footer">
+        Mirco Bisoffi
+      </div>
+
+      
+    </div>
+
+    <!-- AIzaSyCBOmye5VMtg3S4xxHJRo95OH0aM8CgOwg -->
+    <script src="index.js"></script>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBOmye5VMtg3S4xxHJRo95OH0aM8CgOwg&callback=initMap&v=weekly"
+      defer
+    ></script>
+  </body>
+</html>

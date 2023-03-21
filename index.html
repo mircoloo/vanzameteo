@@ -1,51 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./style.css" />
-    <link rel="shortcut icon" href="images/favicon.ico" />
-    <link
-      href="https://fonts.googleapis.com/css?family=Poppins"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-    
-    <title>Vanzameteo</title>
-  </head>
-  <body>
-    <div class="container">
-      <div class="toolbar">
-        <h1 class="title">Vanzameteo</h1>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+      <title>Webcam Trambileno</title>
+      <link rel="stylesheet" href="./style.css">
+   </head>
+   <body>
+      <div class="container">
+            <header>
+                <h1>Vanzameteo</h1>
+            </header>
+            <div class="content">
+              <!--  <h1 class="hero-title">Webcam</h1> -->
+               <div class="section">
+                  <div id="cam-iframe" style="padding-bottom: 56.25%; position:relative; display:block; width: 100%">
+                     <iframe width="100%" height="100%" sandbox
+                       src="http://vanzameteo.altervista.org/foicam/visualizzawebcam.php?codice=294e31d58d34c6b8"
+                       frameborder="0" allowfullscreen="" style="position:absolute; top:0; left: 0">
+                     </iframe>
+                   </div>
+                   <a class="button" href="https://meteonetwork.eu/it/weather-station/trn053-stazione-meteorologica-di-vanza">More Info</a>
+               </div>
+
+              <div class="section">
+                  <div id="map"></div>
+              </div>
+              
+                  
+            </div>
+            <footer>
+                <h3>Fulvio Bisoffi - Vanza, Trambileno ©</h3>
+            </footer>
+         </div>
+         
       </div>
-
-      <div class="content">
-        <div class="section">
-          <div class="embed-responsive embed-responsive-4by3">
-            <iframe class="embed-responsive-item" src="http://vanzameteo.altervista.org/foicam/visualizzawebcam.php?codice=294e31d58d34c6b8"></iframe>
-          </div>
-        <div class="section">
-          <!-- <div id="map"></div> -->
-          <div id="map-container" class="z-depth-1-half map-container" style="height: 500px">
-            <iframe src="https://maps.google.com/maps?q=manhatan&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
-              style="border:0" allowfullscreen></iframe>
-          </div>
-        </div>
-      </div>
-
-      <div class="footer">
-        <h1 class="title">Mirco Bisoffi</h1>
-      </div>
-
-      
-    </div>
-
-    <!-- AIzaSyCBOmye5VMtg3S4xxHJRo95OH0aM8CgOwg -->
-    <script src="index.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBOmye5VMtg3S4xxHJRo95OH0aM8CgOwg&callback=initMap&v=weekly" defer></script>
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
-  </body>
+      <script src="index.js"></script>
+      <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBOmye5VMtg3S4xxHJRo95OH0aM8CgOwg&callback=initMap&v=weekly"
+      defer
+    ></script>
+   </body>
 </html>
