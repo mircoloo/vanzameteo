@@ -2,11 +2,8 @@ var winWidth = window.innerWidth;
 var winHeight = window.innerHeight;
 var bubbles = document.getElementsByClassName('bubble');
 
-  
+
 window.initMap = initMap();
-
-
-
 
 // ======================================= FUNCTIONS ==========================================
 // Initialize and add the map

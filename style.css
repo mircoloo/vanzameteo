@@ -28,10 +28,7 @@ body {
 /* =========== TOOLBAR ============*/
 
 .toolbar, .footer{
-    width: 100%;
-    min-height: 100px;
     background-color: var(--primaryColor);
-   
 }
 
 .toolbar{
@@ -65,18 +62,6 @@ body {
   color: var(--backgroundColor);
 }
   /* ==IFRAMES== */
-
-  .iframe-container{
-    padding-bottom: 56.25%; 
-    display:block; 
-    width: 100%;
-  }
-
-  iframe{
-    background-color: var(--backgroundColor);
-    height: 100%;
-    width: 100%;
-  }
 
   /* ========== BUTTONS ==============*/
 
@@ -155,15 +140,5 @@ body {
 
 
 @media only screen and (max-width: 600px) {
-  #map{width: 100%;}
-  .bubble{
-    visibility: hidden;
-  }
   
-  .content{
-    flex-direction: column;
-  }
-  .section{
-    flex-direction: column;
-  }
 }
