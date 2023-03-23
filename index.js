@@ -15,11 +15,14 @@ function initMap() {
   const map = new google.maps.Map(document.getElementById("map"), {
     zoom: 15,
     center: uluru,
+    mapTypeId: google.maps.MapTypeId.HYBRID,
+    scrollwheel: false,
   });
   // The marker, positioned at Uluru
   const marker = new google.maps.Marker({
     position: uluru,
     map: map,
+    
   });
 }
 
@@ -34,3 +37,13 @@ console.log(w, h, webcam.getBoundingClientRect().x, webcam.getBoundingClientRect
 //webcam.style.transform = "translateX("+  w/100 + "px)";
 }  */
 
+
+// Set the height of the iframe based on its content
+function resizeIframe(obj) {
+  obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+}
+
+// Add an event listener to the iframe to trigger the resize function when the content is loaded
+document.querySelector('.iframe-container iframe').addEventListener('load', function() {
+  resizeIframe(this);
+});

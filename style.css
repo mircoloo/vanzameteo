@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins');
+/* @import url('./style2.css'); */
+
 
 *{
         margin: 0;
@@ -9,9 +11,9 @@
     
     
     /* =================== VARIABLES ================  */
-    :root{
-      --primaryColor:rgb(244, 197, 5);
-      --backgroundColor:rgb(40, 40, 43); 
+:root{
+        --primaryColor:rgb(244, 197, 5);
+        --backgroundColor:rgb(40, 40, 43); 
     }
     
 body{
@@ -27,22 +29,26 @@ body{
 }
 
 
+
 .section{
+        position: relative;
         height: 100vh;
+      
+}
+
+.webcam-section{
+
+
 }
 
 
-.hero-title{
-        position: sticky;
-        top: 0;
-        width: 100%;
-        font-size: 50px;
-        margin: 20px 0;
-        color: white;
-        background-color: rgba(0,0,0,.4);
-        text-align: center;
-        z-index: 1;
+.map-section{
+        display: flex;
+        align-items: center;
 }
+
+
+
 
    /* ======================= IFRAMES ====================== */
 
@@ -57,40 +63,139 @@ iframe{
         margin: 2rem 0;
 }
 
-#map {
-        height: 400px; /* The height is 400 pixels */
-        width: 100%; /* The width is the width of the web page */
-      }
 
 
 /* ===== BUTTON =====*/
 
 .button{
         background-color: var(--primaryColor);
+        position: absolute;
+        
 }
 
 
   /* ======================= FOOTER / TOOLBAR ====================== */
-.footer, .toolbar{
+header{
+        margin-top: 2rem;
         display: flex;
-        border-top: 7px yellow solid;
-        background-color: var(--primaryColor);
-        height: 80px;
-        color: white;
-        align-items: center;
-        justify-content: center;
+       justify-content: space-between;
+       align-items: center;
 }
 
+.title{
+        margin-left: 2rem;
+        font-size: 2rem;
+        color: var(--primaryColor);
+}
+
+.links{
+        display: flex;
+        margin-right: 2rem;
+        align-items: center;
+}
+
+.link{
+        padding: .8rem; 
+        text-decoration: none;
+        color: var(--primaryColor);
+}
+
+.link:hover{ 
+        color: rgb(255, 234, 0);
+}
+
+footer{
+        display: flex;
+        color: var(--primaryColor);
+}
+
+/*======= BUBBLES ========*/
+
+.bubble{
+        margin: 100px;
+        height: 60%;
+        width: 400px;
+        border: 5px solid var(--primaryColor);
+        
+        z-index: 0;  
+        position: absolute;
+      }
+
+.bubble-right{
+        height: 200px;
+        width: 200px;
+        right: 0;
+        top: 0;
+      }
+      
+      .bubble {
+        border-radius: 250px 750px 250px 750px /
+                       750px 250px 750px 250px;
+        animation: wobble 10s ease-in-out alternate infinite;
+      }
+      
+      @keyframes wobble {
+        50% {
+          border-radius: 750px 550px 350px 750px /
+                         350px 750px 550px 450px;
+        }
+        100% {
+          border-radius: 750px 250px 750px 250px /
+                         250px 750px 250px 750px;
+        }
+      }
 
 
 
+
+/* ============== MAP ===================*/
+#map {
+        height: 400px; /* The height is 400 pixels */
+        width: 100%; /* The width is the width of the web page */
+      }
 
 
   /* ======================= MEDIA QUERIES ====================== */
 
+  
 @media only screen and (max-width: 600px){
       
-     
         
 
+     header{
+        flex-direction: column;
+     }
+
+     .title{
+        margin: 0;
+        margin-bottom: 20px;
+     }
+
+     .links{
+        flex-direction: column;
+     }
+
+     .section{
+        
+     }
+     .bubble{
+        
+     }
+
+
 }
+
+.iframe-container {
+        position: relative;
+        width: 100%;
+        height: 0;
+        padding-bottom: 56.25%; /* 16:9 aspect ratio */
+      }
+      
+      .iframe-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }

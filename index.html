@@ -5,26 +5,49 @@
       <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
       <title>Webcam Trambileno</title>
       <link rel="stylesheet" href="./style.css">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
    </head>
    <body>
       <div class="container">
             <header>
-                <h1>Vanzameteo</h1>
+                <h1 class="title">Vanzameteo</h1>
+                <div class="links">
+
+                  <a class="link" href="#" class="link">Home</a>
+                  <a class="link" href="#map" class="link">Maps</a>
+                  <a class="link" href="https://meteonetwork.eu/it/weather-station/trn053-stazione-meteorologica-di-vanza" target="_blank"  class="link">More</a>
+                </div>
             </header>
+
+
             <div class="content">
-              <!--  <h1 class="hero-title">Webcam</h1> -->
+
                <div class="section">
-                  <div id="cam-iframe" style="padding-bottom: 56.25%; position:relative; display:block; width: 100%">
+                  <div class="bubble"></div>
+                  
+               </div>
+
+
+              <!--  <h1 class="hero-title">Webcam</h1> -->
+               <div class="section webcam-section">
+                 
+                  <!-- <div id="cam-iframe" style="padding-bottom: 56.25%; position:relative; display:block; width: 100%">
                      <iframe width="100%" height="100%" sandbox
                        src="http://vanzameteo.altervista.org/foicam/visualizzawebcam.php?codice=294e31d58d34c6b8"
                        frameborder="0" allowfullscreen="" style="position:absolute; top:0; left: 0">
                      </iframe>
-                   </div>
-                   <a class="button" href="https://meteonetwork.eu/it/weather-station/trn053-stazione-meteorologica-di-vanza">More Info</a>
+                   </div> -->
+
+                  <!--  <a class="button" href="https://meteonetwork.eu/it/weather-station/trn053-stazione-meteorologica-di-vanza">More Info</a> -->
+                  <!-- <div class="iframe-container">
+                     <iframe src="http://vanzameteo.altervista.org/foicam/visualizzawebcam.php?codice=294e31d58d34c6b8"></iframe>
+                   </div> -->
+                   <img src="http://vanzameteo.altervista.org/foicam/294e31d58d34c6b8/webcam.php" alt="">
                </div>
 
-              <div class="section">
-                  <div id="map"></div>
+              <div class="section map-section">
+                 
+                  <div #map id="map"></div>
               </div>
               
                   
