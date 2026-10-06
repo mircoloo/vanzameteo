@@ -11,6 +11,13 @@ export interface AppConfig {
     timezone: string;
   };
   weatherRefreshMinutes: number;
+  station: {
+    /** Base URL di backend.php (vuoto = usa solo Open-Meteo). */
+    apiUrl: string;
+    refreshMinutes: number;
+    /** Pagina pubblica della stazione su MeteoNetwork. */
+    infoUrl: string;
+  };
   webcam: {
     url: string;
     refreshSeconds: number;
@@ -22,11 +29,16 @@ export const DEFAULT_APP_CONFIG: AppConfig = {
   stationName: 'Vanzameteo',
   location: {
     name: 'Vanza (Trambileno, TN)',
-    latitude: 45.8665,
-    longitude: 11.0905,
+    latitude: 45.850755,
+    longitude: 11.077408,
     timezone: 'Europe/Rome',
   },
   weatherRefreshMinutes: 10,
+  station: {
+    apiUrl: '/backend.php',
+    refreshMinutes: 5,
+    infoUrl: 'https://meteonetwork.eu/it/weather-station/trn053-stazione-meteorologica-di-vanza',
+  },
   webcam: {
     url: 'https://vanzameteo.altervista.org/foicam/294e31d58d34c6b8/webcam.jpg',
     refreshSeconds: 60,
@@ -64,6 +76,7 @@ export function mergeConfig(base: AppConfig, override: Partial<AppConfig> | null
     ...base,
     ...override,
     location: { ...base.location, ...override.location },
+    station: { ...base.station, ...override.station },
     webcam: { ...base.webcam, ...override.webcam },
   };
 }

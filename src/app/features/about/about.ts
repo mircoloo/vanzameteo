@@ -15,7 +15,13 @@ import { AppConfigService } from '../../core/config/app-config';
           <ul>
             <li>Coordinate: {{ config().location.latitude }}, {{ config().location.longitude }}</li>
             <li>
-              Dati meteo forniti da
+              Dati attuali e storico dalla
+              <a [href]="config().station.infoUrl" target="_blank" rel="noopener"
+                >stazione meteo di Vanza su MeteoNetwork</a
+              >, aggiornati ogni {{ config().station.refreshMinutes }} minuti.
+            </li>
+            <li>
+              Previsioni fornite da
               <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a>
               (licenza CC BY 4.0), aggiornati ogni {{ config().weatherRefreshMinutes }} minuti.
             </li>

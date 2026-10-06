@@ -13,15 +13,15 @@ import {
   CategoryScale,
   Chart,
   Filler,
+  Legend,
   LinearScale,
   LineController,
   LineElement,
   PointElement,
   Tooltip,
 } from 'chart.js';
-import { HourlyPoint } from '../../../core/weather/weather.models';
+import { DailyTemperatures } from '../../../core/station/station.models';
 
-// Registrazione selettiva: riduce il bundle rispetto a 'chart.js/auto'.
 Chart.register(
   LineController,
   LineElement,
@@ -29,19 +29,30 @@ Chart.register(
   LinearScale,
   CategoryScale,
   Filler,
+  Legend,
   Tooltip,
 );
 
-const ACCENT = '#ffd700';
+const SERIES = [
+  { key: 'max', label: 'Massima', color: '#f43f5e' },
+  { key: 'med', label: 'Media', color: '#ffd700' },
+  { key: 'min', label: 'Minima', color: '#38bdf8' },
+] as const;
 
 @Component({
-  selector: 'app-temperature-chart',
+  selector: 'app-history-chart',
   template: `
     <div class="card card-dark">
       <div class="card-body">
-        <h2 class="h5 card-title text-body-secondary">Previsione prossime 24 ore</h2>
+        <h2 class="h5 card-title text-body-secondary">
+          Temperature ultimi {{ days().length }} giorni
+        </h2>
         <div class="chart-box">
-          <canvas #canvas aria-label="Grafico temperatura prossime 24 ore" role="img"></canvas>
+          <canvas
+            #canvas
+            aria-label="Grafico temperature giornaliere della stazione"
+            role="img"
+          ></canvas>
         </div>
       </div>
     </div>
@@ -49,58 +60,53 @@ const ACCENT = '#ffd700';
   styles: `
     .chart-box {
       position: relative;
-      height: 220px;
+      height: 260px;
     }
   `,
 })
-export class TemperatureChart {
-  readonly points = input.required<HourlyPoint[]>();
+export class HistoryChart {
+  readonly days = input.required<DailyTemperatures[]>();
 
   private readonly canvas = viewChild.required<ElementRef<HTMLCanvasElement>>('canvas');
   private readonly locale = inject(LOCALE_ID);
-  private chart?: Chart<'line'>;
+  private chart?: Chart<'line', (number | null)[]>;
 
   constructor() {
-    effect(() => this.render(this.points()));
+    effect(() => this.render(this.days()));
     inject(DestroyRef).onDestroy(() => this.chart?.destroy());
   }
 
-  private render(points: HourlyPoint[]): void {
-    const labels = points.map((p) => formatDate(p.time, 'HH:mm', this.locale));
-    const data = points.map((p) => p.temperature);
+  private render(days: DailyTemperatures[]): void {
+    const labels = days.map((d) => formatDate(d.date, 'd MMM', this.locale));
+    const datasets = SERIES.map((s) => ({
+      label: s.label,
+      data: days.map((d) => d[s.key]),
+      borderColor: s.color,
+      backgroundColor: s.color,
+      borderWidth: 2,
+      pointRadius: 0,
+      pointHoverRadius: 4,
+      tension: 0.35,
+      spanGaps: true,
+    }));
 
     if (this.chart) {
       this.chart.data.labels = labels;
-      this.chart.data.datasets[0].data = data;
+      this.chart.data.datasets = datasets;
       this.chart.update();
       return;
     }
 
     this.chart = new Chart(this.canvas().nativeElement, {
       type: 'line',
-      data: {
-        labels,
-        datasets: [
-          {
-            label: 'Temperatura °C',
-            data,
-            borderColor: ACCENT,
-            backgroundColor: 'rgba(255, 215, 0, 0.12)',
-            borderWidth: 2,
-            pointRadius: 0,
-            pointHoverRadius: 4,
-            fill: true,
-            tension: 0.35,
-          },
-        ],
-      },
+      data: { labels, datasets },
       options: {
         responsive: true,
         maintainAspectRatio: false,
         interaction: { mode: 'index', intersect: false },
         plugins: {
-          legend: { display: false },
-          tooltip: { callbacks: { label: (ctx) => `${ctx.parsed.y} °C` } },
+          legend: { labels: { color: '#ccc', usePointStyle: true, boxWidth: 8 } },
+          tooltip: { callbacks: { label: (ctx) => `${ctx.dataset.label}: ${ctx.parsed.y} °C` } },
         },
         scales: {
           x: { ticks: { color: '#aaa', maxTicksLimit: 8 }, grid: { color: '#222' } },

@@ -2,17 +2,15 @@
   <div class="hero-overlay">
     <div class="container-md py-4">
       <h1 class="h3 mb-1">{{ config().location.name }}</h1>
-      @if (weather.hasValue()) {
-        <p class="mb-0 text-body-secondary">
-          Aggiornato alle {{ weather.value().current.time | date: 'HH:mm' }}
-        </p>
+      @if (reading()?.time; as time) {
+        <p class="mb-0 text-body-secondary">Aggiornato alle {{ time | date: 'HH:mm' }}</p>
       }
     </div>
   </div>
 </section>
 
 <div class="container-md">
-  @if (weather.error()) {
+  @if (noData()) {
     <div class="alert alert-warning d-flex justify-content-between align-items-center" role="alert">
       <span>Impossibile caricare i dati meteo. Controlla la connessione.</span>
       <button type="button" class="btn btn-sm btn-outline-warning" (click)="reload()">
@@ -23,9 +21,9 @@
 
   <div class="row g-4">
     <div class="col-lg-5 d-flex flex-column gap-4">
-      @if (weather.hasValue()) {
-        <app-current-conditions [current]="weather.value().current" />
-      } @else if (weather.isLoading()) {
+      @if (!waitingForStation() && reading(); as current) {
+        <app-current-conditions [reading]="current" [stationUrl]="config().station.infoUrl" />
+      } @else if (!noData()) {
         <div class="card card-dark p-4 placeholder-glow" aria-busy="true">
           <span class="placeholder col-6 mb-3"></span>
           <span class="placeholder col-4 placeholder-lg mb-3"></span>
@@ -45,5 +43,11 @@
         <app-daily-forecast [days]="weather.value().daily" />
       }
     </div>
+
+    @if (history.hasValue() && history.value().length > 1) {
+      <div class="col-12">
+        <app-history-chart [days]="history.value()" />
+      </div>
+    }
   </div>
 </div>

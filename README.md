@@ -4,8 +4,10 @@ Sito meteo di Vanza (Trambileno, TN): condizioni attuali, grafico delle prossime
 previsioni a 7 giorni e webcam live. Applicazione Angular statica, pensata per essere
 pubblicata su [vanzameteo.altervista.org](https://vanzameteo.altervista.org).
 
-I dati meteo arrivano da [Open-Meteo](https://open-meteo.com/) (gratuito, senza chiave API,
-licenza CC BY 4.0). L'immagine di sfondo cambia in base al tempo (sole, nuvoloso, pioggia, neve).
+I dati attuali e lo storico arrivano dalla stazione di Vanza su MeteoNetwork, tramite il
+backend PHP già presente sul sito (`backend.php/weatherData` e `backend.php/getTemps`). Le
+previsioni arrivano da [Open-Meteo](https://open-meteo.com/) (gratuito, senza chiave API, licenza
+CC BY 4.0), che fa anche da riserva se la stazione non risponde. L'immagine di sfondo cambia in base al tempo (sole, nuvoloso, pioggia, neve).
 
 ## Requisiti
 
@@ -16,7 +18,7 @@ licenza CC BY 4.0). L'immagine di sfondo cambia in base al tempo (sole, nuvoloso
 
 ```bash
 npm install
-npm start          # http://localhost:4200
+npm start          # http://localhost:4200 (backend.php inoltrato al sito vero, vedi proxy.conf.json)
 npm run test:ci    # test unitari (Vitest)
 npm run build      # build di produzione in dist/vanzameteo-angular/browser
 ```
@@ -30,7 +32,10 @@ dall'app all'avvio. Si può modificare anche direttamente sul server, senza rico
 | ----------------------- | --------------------------------------------------------- |
 | `stationName`           | Nome mostrato nella barra di navigazione                  |
 | `location`              | Nome località, latitudine, longitudine e fuso orario      |
-| `weatherRefreshMinutes` | Ogni quanti minuti ricaricare i dati meteo (0 = mai)      |
+| `weatherRefreshMinutes` | Ogni quanti minuti ricaricare le previsioni (0 = mai)     |
+| `station.apiUrl`        | Indirizzo di `backend.php` (vuoto = solo Open-Meteo)      |
+| `station.refreshMinutes`| Ogni quanti minuti rileggere la stazione (0 = mai)        |
+| `station.infoUrl`       | Pagina della stazione su MeteoNetwork                     |
 | `webcam.url`            | Indirizzo dell'immagine della webcam                      |
 | `webcam.refreshSeconds` | Ogni quanti secondi ricaricare la webcam (0 = mai)        |
 
