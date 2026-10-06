@@ -71,6 +71,18 @@ via FTP. Su GitHub, in *Settings → Secrets and variables → Actions*, imposta
 - **Variables** (facoltative): `FTP_SERVER_DIR` (default `./`), `BASE_HREF` (default `/`),
   `DEPLOY_ON_PUSH` = `true` per pubblicare a ogni push su `dev/angular`
 
-Senza `DEPLOY_ON_PUSH` il deploy parte solo a mano, da *Actions → Deploy su Altervista → Run
-workflow*. L'azione cancella sul server solo i file che ha caricato lei stessa nei deploy
-precedenti, quindi le altre cartelle del sito restano intatte.
+Il deploy si avvia a mano da *Actions → Deploy su Altervista → Run workflow*, scegliendo la
+destinazione:
+
+- **prova** (predefinita): sottocartella `/prova/`, visibile su
+  https://vanzameteo.altervista.org/prova/ senza toccare il sito attuale;
+- **principale**: cartella principale del sito.
+
+Con `DEPLOY_ON_PUSH` = `true` ogni push su `dev/angular` pubblica anche nella principale.
+L'azione cancella sul server solo i file che ha caricato lei stessa nei deploy precedenti,
+quindi le altre cartelle del sito restano intatte.
+
+> **Nota Altervista**: l'FTP accetta solo le nazioni consentite nel pannello di controllo. I
+> server di GitHub sono di solito negli Stati Uniti: se il deploy fallisce con
+> `530 Autenticazione fallita ... aggiungi la nazione`, aggiungi gli Stati Uniti tra le nazioni
+> consentite per l'FTP.
