@@ -44,8 +44,10 @@ export interface RawStationReading {
   current_tmax?: RawValue;
 }
 
+/** Il backend online può chiamare la data `timestamp` (backend.php attuale) o `date`. */
 export interface RawDailyHistory {
-  timestamp: string;
+  timestamp?: string;
+  date?: string;
   min_temp?: RawValue;
   med_temp?: RawValue;
   max_temp?: RawValue;

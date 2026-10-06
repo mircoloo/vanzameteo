@@ -49,6 +49,16 @@ describe('station mapping', () => {
     expect(mapStationReading({ wind_direction: 270 }).windDirection).toBe('O');
   });
 
+  it('accepts a `date` field, sorts by day and ignores non-array responses', () => {
+    const rows = mapDailyHistory([
+      { date: '2026-10-05', med_temp: '11', daily_rain: '0' },
+      { date: '2026-10-03 08:00:00', med_temp: '9' },
+    ]);
+    expect(rows.map((r) => r.date.getDate())).toEqual([3, 5]);
+    expect(rows[1].date.getHours()).toBe(0);
+    expect(mapDailyHistory({ error: 'x' })).toEqual([]);
+  });
+
   it('maps getTemps rows and drops invalid dates', () => {
     const rows = mapDailyHistory([
       {

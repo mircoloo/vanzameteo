@@ -19,7 +19,7 @@ export class StationService {
   /** Temperature (e pioggia, se disponibile) degli ultimi 31 giorni. */
   readonly history = httpResource<DailyHistory[]>(
     () => (this.apiUrl() ? `${this.apiUrl()}/getTemps` : undefined),
-    { parse: (raw) => mapDailyHistory(raw as RawDailyHistory[]) },
+    { parse: (raw) => mapDailyHistory(raw) },
   );
 
   constructor() {
@@ -40,7 +40,9 @@ export function toNumber(value: unknown): number | null {
 /** Interpreta "YYYY-MM-DD HH:mm:ss" come ora locale. */
 export function parseLocalDateTime(value: string | null | undefined): Date | null {
   if (!value) return null;
-  const date = new Date(value.trim().replace(' ', 'T'));
+  const text = value.trim().replace(' ', 'T');
+  // Una data senza ora ("2026-10-05") va letta come mezzanotte locale, non UTC.
+  const date = new Date(text.length === 10 ? `${text}T00:00` : text);
   return Number.isNaN(date.getTime()) ? null : date;
 }
 
@@ -69,14 +71,16 @@ export function mapStationReading(raw: RawStationReading): StationReading {
   };
 }
 
-export function mapDailyHistory(rows: RawDailyHistory[]): DailyHistory[] {
-  return rows
+export function mapDailyHistory(rows: unknown): DailyHistory[] {
+  if (!Array.isArray(rows)) return [];
+  return (rows as RawDailyHistory[])
     .map((row) => ({
-      date: parseLocalDateTime(row.timestamp),
+      date: parseLocalDateTime(row.timestamp ?? row.date),
       min: toNumber(row.min_temp),
       med: toNumber(row.med_temp),
       max: toNumber(row.max_temp),
       rain: toNumber(row.daily_rain),
     }))
-    .filter((row): row is DailyHistory => row.date !== null);
+    .filter((row): row is DailyHistory => row.date !== null)
+    .sort((a, b) => a.date.getTime() - b.date.getTime());
 }

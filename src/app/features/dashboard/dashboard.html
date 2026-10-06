@@ -52,6 +52,19 @@
       <div class="col-12">
         <app-month-history [days]="history.value()" />
       </div>
+    } @else if (history.status() === 'error' || history.status() === 'resolved') {
+      <div class="col-12">
+        <div class="card card-dark">
+          <div class="card-body small text-body-secondary">
+            <strong class="text-body">Ultimo mese:</strong>
+            @if (history.error()) {
+              lo storico della stazione non è disponibile al momento.
+            } @else {
+              non ci sono ancora abbastanza giorni registrati per il grafico.
+            }
+          </div>
+        </div>
+      </div>
     }
   </div>
 </div>
