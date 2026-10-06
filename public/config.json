@@ -1,0 +1,14 @@
+{
+  "stationName": "Vanzameteo",
+  "location": {
+    "name": "Vanza (Trambileno, TN)",
+    "latitude": 45.8665,
+    "longitude": 11.0905,
+    "timezone": "Europe/Rome"
+  },
+  "weatherRefreshMinutes": 10,
+  "webcam": {
+    "url": "https://vanzameteo.altervista.org/foicam/294e31d58d34c6b8/webcam.jpg",
+    "refreshSeconds": 60
+  }
+}

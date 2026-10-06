@@ -1,0 +1,7 @@
+.forecast li + li {
+  border-top: 1px solid var(--vm-card-border);
+}
+
+.day {
+  width: 4.5rem;
+}

@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand-md border-bottom border-secondary-subtle sticky-top app-navbar">
+  <div class="container-md">
+    <a
+      class="navbar-brand d-flex align-items-center gap-2 fw-semibold"
+      routerLink="/"
+      (click)="closeMenu()"
+    >
+      <img src="img/logo.webp" alt="" width="28" height="28" class="rounded-circle" />
+      {{ config().stationName }}
+    </a>
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      aria-controls="mainNav"
+      [attr.aria-expanded]="menuOpen()"
+      aria-label="Apri menu"
+      (click)="toggleMenu()"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="mainNav" class="collapse navbar-collapse" [class.show]="menuOpen()">
+      <ul class="navbar-nav ms-auto">
+        @for (link of links; track link.path) {
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [routerLink]="link.path"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: link.exact }"
+              ariaCurrentWhenActive="page"
+              (click)="closeMenu()"
+              >{{ link.label }}</a
+            >
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
+</nav>

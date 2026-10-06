@@ -1,0 +1,29 @@
+<div class="card card-dark overflow-hidden">
+  @if (!failed()) {
+    <a [href]="url()" target="_blank" rel="noopener" title="Apri l'immagine a piena risoluzione">
+      <img
+        [src]="src()"
+        class="card-img-top"
+        alt="Webcam live di Vanza"
+        loading="lazy"
+        (error)="failed.set(true)"
+      />
+    </a>
+  } @else {
+    <div class="ratio ratio-16x9 bg-black d-flex">
+      <div class="d-flex flex-column align-items-center justify-content-center text-body-secondary">
+        <span>Webcam non disponibile al momento</span>
+        <button type="button" class="btn btn-sm btn-outline-secondary mt-2" (click)="refresh()">
+          Riprova
+        </button>
+      </div>
+    </div>
+  }
+
+  <div
+    class="card-body d-flex justify-content-between align-items-center small text-body-secondary"
+  >
+    <span><span class="live-dot" aria-hidden="true"></span> Webcam live</span>
+    <span>Aggiornata alle {{ lastUpdate() | date: 'HH:mm:ss' }}</span>
+  </div>
+</div>

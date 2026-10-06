@@ -1,2 +1,16 @@
-<app-navbar></app-navbar>
-<app-weather-dashboard></app-weather-dashboard>
+<app-navbar />
+
+<main class="flex-grow-1">
+  <router-outlet />
+</main>
+
+<footer class="py-3 mt-4 border-top border-secondary-subtle small text-body-secondary">
+  <div class="container-md d-flex flex-wrap justify-content-between gap-2">
+    <span>© {{ year }} Vanzameteo</span>
+    <span>
+      Dati meteo:
+      <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo.com</a>
+      (CC BY 4.0)
+    </span>
+  </div>
+</footer>

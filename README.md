@@ -1,59 +1,76 @@
-# VanzameteoAngular
+# Vanzameteo
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.0.1.
+Sito meteo di Vanza (Trambileno, TN): condizioni attuali, grafico delle prossime 24 ore,
+previsioni a 7 giorni e webcam live. Applicazione Angular statica, pensata per essere
+pubblicata su [vanzameteo.altervista.org](https://vanzameteo.altervista.org).
 
-## Development server
+I dati meteo arrivano da [Open-Meteo](https://open-meteo.com/) (gratuito, senza chiave API,
+licenza CC BY 4.0). L'immagine di sfondo cambia in base al tempo (sole, nuvoloso, pioggia, neve).
 
-To start a local development server, run:
+## Requisiti
 
-```bash
-ng serve
-```
+- Node.js ≥ 22.22.3 (consigliato 24, vedi `.nvmrc`)
+- npm
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Sviluppo
 
 ```bash
-ng generate component component-name
+npm install
+npm start          # http://localhost:4200
+npm run test:ci    # test unitari (Vitest)
+npm run build      # build di produzione in dist/vanzameteo-angular/browser
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Configurazione
 
-```bash
-ng generate --help
+Tutto ciò che riguarda la stazione sta in [`public/config.json`](public/config.json), letto
+dall'app all'avvio. Si può modificare anche direttamente sul server, senza ricompilare:
+
+| Campo                   | Descrizione                                               |
+| ----------------------- | --------------------------------------------------------- |
+| `stationName`           | Nome mostrato nella barra di navigazione                  |
+| `location`              | Nome località, latitudine, longitudine e fuso orario      |
+| `weatherRefreshMinutes` | Ogni quanti minuti ricaricare i dati meteo (0 = mai)      |
+| `webcam.url`            | Indirizzo dell'immagine della webcam                      |
+| `webcam.refreshSeconds` | Ogni quanti secondi ricaricare la webcam (0 = mai)        |
+
+## Struttura
+
+```
+src/app/
+  core/config/       configurazione runtime (config.json)
+  core/weather/      servizio Open-Meteo, modelli, codici meteo WMO → descrizione/immagine
+  layout/navbar/     barra di navigazione
+  features/dashboard pagina principale (meteo attuale, grafico, previsioni, webcam)
+  features/about     pagina Info
+public/              file copiati così come sono nella build (immagini, config.json, .htaccess)
 ```
 
-## Building
+## Deploy su Altervista
 
-To build the project run:
+La build è una cartella di file statici (`dist/vanzameteo-angular/browser`), incluso un
+`.htaccess` che fa funzionare gli indirizzi dell'app (es. `/info`) senza toccare le cartelle
+già presenti sul server (es. `/foicam`).
 
-```bash
-ng build
-```
+### Manuale (FTP)
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+1. `npm run build`
+2. Carica **il contenuto** di `dist/vanzameteo-angular/browser/` nella cartella principale del
+   sito con un client FTP (es. FileZilla, host `ftp.vanzameteo.altervista.org`). Assicurati che
+   il client mostri/carichi anche i file nascosti (`.htaccess`).
 
-## Running unit tests
+Per pubblicarla in una sottocartella (es. `/nuovo/`) compila con
+`npm run build -- --base-href /nuovo/` e carica i file in quella cartella.
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+### Automatico (GitHub Actions)
 
-```bash
-ng test
-```
+Il workflow [`deploy.yml`](.github/workflows/deploy.yml) compila, esegue i test e carica i file
+via FTP. Su GitHub, in *Settings → Secrets and variables → Actions*, imposta:
 
-## Running end-to-end tests
+- **Secrets**: `FTP_SERVER` (`ftp.vanzameteo.altervista.org`), `FTP_USERNAME`, `FTP_PASSWORD`
+- **Variables** (facoltative): `FTP_SERVER_DIR` (default `./`), `BASE_HREF` (default `/`),
+  `DEPLOY_ON_PUSH` = `true` per pubblicare a ogni push su `dev/angular`
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Senza `DEPLOY_ON_PUSH` il deploy parte solo a mano, da *Actions → Deploy su Altervista → Run
+workflow*. L'azione cancella sul server solo i file che ha caricato lei stessa nei deploy
+precedenti, quindi le altre cartelle del sito restano intatte.
