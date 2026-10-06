@@ -3,12 +3,12 @@ name: Deploy su Altervista
 # Pubblica la build via FTP su vanzameteo.altervista.org.
 # Secrets richiesti: FTP_SERVER, FTP_USERNAME, FTP_PASSWORD.
 # Variabili opzionali: FTP_SERVER_DIR (default "./"), BASE_HREF (default "/"),
-# DEPLOY_ON_PUSH = "true" per pubblicare automaticamente ad ogni push su main.
+# DEPLOY_ON_PUSH = "true" per pubblicare automaticamente ad ogni push su dev/angular.
 
 on:
   workflow_dispatch:
   push:
-    branches: [main]
+    branches: [dev/angular]
 
 concurrency:
   group: deploy-altervista

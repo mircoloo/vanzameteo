@@ -69,7 +69,7 @@ via FTP. Su GitHub, in *Settings → Secrets and variables → Actions*, imposta
 
 - **Secrets**: `FTP_SERVER` (`ftp.vanzameteo.altervista.org`), `FTP_USERNAME`, `FTP_PASSWORD`
 - **Variables** (facoltative): `FTP_SERVER_DIR` (default `./`), `BASE_HREF` (default `/`),
-  `DEPLOY_ON_PUSH` = `true` per pubblicare a ogni push su `main`
+  `DEPLOY_ON_PUSH` = `true` per pubblicare a ogni push su `dev/angular`
 
 Senza `DEPLOY_ON_PUSH` il deploy parte solo a mano, da *Actions → Deploy su Altervista → Run
 workflow*. L'azione cancella sul server solo i file che ha caricato lei stessa nei deploy
