@@ -64,8 +64,8 @@ già presenti sul server (es. `/foicam`).
    sito con un client FTP (es. FileZilla, host `ftp.vanzameteo.altervista.org`). Assicurati che
    il client mostri/carichi anche i file nascosti (`.htaccess`).
 
-Per pubblicarla in una sottocartella (es. `/nuovo/`) compila con
-`npm run build -- --base-href /nuovo/` e carica i file in quella cartella.
+Per pubblicarla in `/test/` compila con `npm run build -- --base-href /test/` e carica i file
+nella cartella `test`.
 
 ### Automatico (GitHub Actions)
 
@@ -74,16 +74,20 @@ via FTP. Su GitHub, in *Settings → Secrets and variables → Actions*, imposta
 
 - **Secrets**: `FTP_SERVER` (`ftp.vanzameteo.altervista.org`), `FTP_USERNAME`, `FTP_PASSWORD`
 - **Variables** (facoltative): `FTP_SERVER_DIR` (default `./`), `BASE_HREF` (default `/`),
-  `DEPLOY_ON_PUSH` = `true` per pubblicare a ogni push su `dev/angular`
+  `DEPLOY_ON_PUSH` = `true` per pubblicare in `/test/` a ogni push su `dev/angular`
 
-Il deploy si avvia a mano da *Actions → Deploy su Altervista → Run workflow*, scegliendo la
+**Regola: ogni nuova versione va prima in `/test/`, e solo dopo averla verificata nella
+cartella principale.**
+
+Il deploy si avvia da *Actions → Deploy su Altervista → Run workflow*, scegliendo la
 destinazione:
 
-- **prova** (predefinita): sottocartella `/prova/`, visibile su
-  https://vanzameteo.altervista.org/prova/ senza toccare il sito attuale;
-- **principale**: cartella principale del sito.
+- **test** (predefinita): sottocartella `/test/`, visibile su
+  https://vanzameteo.altervista.org/test/ senza toccare il sito attuale;
+- **principale**: cartella principale del sito, solo a mano e dopo aver controllato `/test/`.
 
-Con `DEPLOY_ON_PUSH` = `true` ogni push su `dev/angular` pubblica anche nella principale.
+Con `DEPLOY_ON_PUSH` = `true` ogni push su `dev/angular` pubblica automaticamente in `/test/`
+(mai nella principale).
 L'azione cancella sul server solo i file che ha caricato lei stessa nei deploy precedenti,
 quindi le altre cartelle del sito restano intatte.
 

@@ -3,10 +3,11 @@ name: Deploy su Altervista
 # Pubblica la build via FTP su vanzameteo.altervista.org.
 # Secrets richiesti: FTP_SERVER, FTP_USERNAME, FTP_PASSWORD.
 #
-# Avvio manuale (Actions → Run workflow) con la scelta della destinazione:
-#   - prova:      sottocartella /prova/ → https://vanzameteo.altervista.org/prova/
-#   - principale: cartella principale del sito (o FTP_SERVER_DIR / BASE_HREF se impostate)
-# Con la variabile DEPLOY_ON_PUSH = "true" pubblica anche nella principale a ogni push su dev/angular.
+# Regola: ogni versione va PRIMA in /test/ e solo dopo la verifica nella cartella principale.
+#   - test (predefinita): sottocartella /test/ → https://vanzameteo.altervista.org/test/
+#   - principale: cartella principale del sito (o FTP_SERVER_DIR / BASE_HREF se impostate),
+#     solo con avvio manuale (Actions → Run workflow → principale).
+# Con la variabile DEPLOY_ON_PUSH = "true" ogni push su dev/angular pubblica in /test/.
 
 on:
   workflow_dispatch:
@@ -14,8 +15,8 @@ on:
       destinazione:
         description: Dove pubblicare il sito
         type: choice
-        options: [prova, principale]
-        default: prova
+        options: [test, principale]
+        default: test
   push:
     branches: [dev/angular]
 
@@ -31,13 +32,14 @@ jobs:
       - name: Scegli la destinazione
         id: target
         env:
-          DESTINAZIONE: ${{ inputs.destinazione || 'principale' }}
+          DESTINAZIONE: ${{ inputs.destinazione || 'test' }}
           SERVER_DIR: ${{ vars.FTP_SERVER_DIR || './' }}
           BASE_HREF: ${{ vars.BASE_HREF || '/' }}
         run: |
-          if [ "$DESTINAZIONE" = "prova" ]; then
-            SERVER_DIR="prova/"
-            BASE_HREF="/prova/"
+          if [ "$DESTINAZIONE" != "principale" ]; then
+            DESTINAZIONE="test"
+            SERVER_DIR="test/"
+            BASE_HREF="/test/"
           fi
           echo "server_dir=$SERVER_DIR" >> "$GITHUB_OUTPUT"
           echo "base_href=$BASE_HREF" >> "$GITHUB_OUTPUT"
