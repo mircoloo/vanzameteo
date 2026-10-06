@@ -1,14 +1,30 @@
 <div class="card card-dark overflow-hidden">
   @if (!failed()) {
-    <a [href]="url()" target="_blank" rel="noopener" title="Apri l'immagine a piena risoluzione">
-      <img
-        [src]="src()"
-        class="card-img-top"
-        alt="Webcam live di Vanza"
-        loading="lazy"
-        (error)="failed.set(true)"
-      />
-    </a>
+    @if (slideshowSrc()) {
+      <button
+        type="button"
+        class="webcam-button"
+        title="Guarda la sequenza delle foto"
+        (click)="openSlideshow()"
+      >
+        <img
+          [src]="src()"
+          class="card-img-top"
+          alt="Webcam live di Vanza"
+          (error)="failed.set(true)"
+        />
+        <span class="webcam-hint">▶ Slideshow</span>
+      </button>
+    } @else {
+      <a [href]="url()" target="_blank" rel="noopener" title="Apri l'immagine a piena risoluzione">
+        <img
+          [src]="src()"
+          class="card-img-top"
+          alt="Webcam live di Vanza"
+          (error)="failed.set(true)"
+        />
+      </a>
+    }
   } @else {
     <div class="ratio ratio-16x9 bg-black d-flex">
       <div class="d-flex flex-column align-items-center justify-content-center text-body-secondary">
@@ -27,3 +43,38 @@
     <span>Aggiornata alle {{ lastUpdate() | date: 'HH:mm:ss' }}</span>
   </div>
 </div>
+
+@if (slideshowSrc(); as slideshow) {
+  <dialog
+    #dialog
+    class="slideshow"
+    aria-label="Sequenza delle foto della webcam"
+    (close)="slideshowOpen.set(false)"
+    (click)="onDialogClick($event)"
+  >
+    <div class="slideshow-header">
+      <span>Webcam di Vanza · sequenza foto</span>
+      <div class="d-flex gap-2">
+        <a
+          class="btn btn-sm btn-outline-secondary"
+          [href]="slideshowUrl()"
+          target="_blank"
+          rel="noopener"
+        >
+          Apri in una nuova scheda
+        </a>
+        <button
+          type="button"
+          class="btn btn-sm btn-outline-light"
+          (click)="closeSlideshow()"
+          aria-label="Chiudi"
+        >
+          ✕
+        </button>
+      </div>
+    </div>
+    @if (slideshowOpen()) {
+      <iframe [src]="slideshow" title="Sequenza delle foto della webcam"></iframe>
+    }
+  </dialog>
+}

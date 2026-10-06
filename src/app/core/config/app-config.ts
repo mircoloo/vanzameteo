@@ -21,6 +21,8 @@ export interface AppConfig {
   webcam: {
     url: string;
     refreshSeconds: number;
+    /** Pagina con la sequenza delle foto (FoiCam); vuoto = nessuno slideshow. */
+    slideshowUrl: string;
   };
 }
 
@@ -42,6 +44,7 @@ export const DEFAULT_APP_CONFIG: AppConfig = {
   webcam: {
     url: 'https://vanzameteo.altervista.org/foicam/294e31d58d34c6b8/webcam.jpg',
     refreshSeconds: 60,
+    slideshowUrl: '/foicam/areaprivata/video.php?code=294e31d58d34c6b8',
   },
 };
 

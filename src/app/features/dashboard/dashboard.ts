@@ -7,13 +7,13 @@ import { WeatherService } from '../../core/weather/weather.service';
 import { CurrentConditions } from './current-conditions/current-conditions';
 import { readingFromModel, readingFromStation } from './current-conditions/current-reading';
 import { DailyForecastList } from './daily-forecast/daily-forecast';
-import { HistoryChart } from './history-chart/history-chart';
+import { MonthHistory } from './month-history/month-history';
 import { TemperatureChart } from './temperature-chart/temperature-chart';
 import { Webcam } from './webcam/webcam';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [DatePipe, CurrentConditions, TemperatureChart, HistoryChart, DailyForecastList, Webcam],
+  imports: [DatePipe, CurrentConditions, TemperatureChart, MonthHistory, DailyForecastList, Webcam],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })

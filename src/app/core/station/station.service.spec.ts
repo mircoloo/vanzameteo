@@ -1,5 +1,5 @@
 import {
-  mapDailyTemperatures,
+  mapDailyHistory,
   mapStationReading,
   parseLocalDateTime,
   toNumber,
@@ -50,11 +50,18 @@ describe('station mapping', () => {
   });
 
   it('maps getTemps rows and drops invalid dates', () => {
-    const rows = mapDailyTemperatures([
-      { timestamp: '2026-10-05 00:10:00', min_temp: '7.1', med_temp: '11', max_temp: '16.2' },
+    const rows = mapDailyHistory([
+      {
+        timestamp: '2026-10-05 00:10:00',
+        min_temp: '7.1',
+        med_temp: '11',
+        max_temp: '16.2',
+        daily_rain: '2.4',
+      },
       { timestamp: 'garbage', min_temp: '1' },
     ]);
     expect(rows).toHaveLength(1);
-    expect(rows[0]).toMatchObject({ min: 7.1, med: 11, max: 16.2 });
+    expect(rows[0]).toMatchObject({ min: 7.1, med: 11, max: 16.2, rain: 2.4 });
+    expect(rows).not.toContainEqual(expect.objectContaining({ min: 1 }));
   });
 });

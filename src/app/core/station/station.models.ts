@@ -16,11 +16,13 @@ export interface StationReading {
 }
 
 /** Riga dello storico giornaliero (`backend.php/getTemps`). */
-export interface DailyTemperatures {
+export interface DailyHistory {
   date: Date;
   min: number | null;
   med: number | null;
   max: number | null;
+  /** Pioggia del giorno in mm; null se il backend non la restituisce. */
+  rain: number | null;
 }
 
 /** Valori come arrivano da MeteoNetwork: numeri spesso serializzati come stringhe. */
@@ -42,9 +44,10 @@ export interface RawStationReading {
   current_tmax?: RawValue;
 }
 
-export interface RawDailyTemperatures {
+export interface RawDailyHistory {
   timestamp: string;
   min_temp?: RawValue;
   med_temp?: RawValue;
   max_temp?: RawValue;
+  daily_rain?: RawValue;
 }

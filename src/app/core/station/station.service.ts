@@ -2,12 +2,7 @@ import { httpResource } from '@angular/common/http';
 import { computed, DestroyRef, inject, Service } from '@angular/core';
 import { AppConfigService } from '../config/app-config';
 import { windDirectionLabel } from '../weather/weather-codes';
-import {
-  DailyTemperatures,
-  RawDailyTemperatures,
-  RawStationReading,
-  StationReading,
-} from './station.models';
+import { DailyHistory, RawDailyHistory, RawStationReading, StationReading } from './station.models';
 
 /** Dati della stazione di Vanza letti da backend.php (stesso sito Altervista). */
 @Service()
@@ -21,10 +16,10 @@ export class StationService {
     { parse: (raw) => mapStationReading(raw as RawStationReading) },
   );
 
-  /** Minime, medie e massime degli ultimi 31 giorni. */
-  readonly history = httpResource<DailyTemperatures[]>(
+  /** Temperature (e pioggia, se disponibile) degli ultimi 31 giorni. */
+  readonly history = httpResource<DailyHistory[]>(
     () => (this.apiUrl() ? `${this.apiUrl()}/getTemps` : undefined),
-    { parse: (raw) => mapDailyTemperatures(raw as RawDailyTemperatures[]) },
+    { parse: (raw) => mapDailyHistory(raw as RawDailyHistory[]) },
   );
 
   constructor() {
@@ -74,13 +69,14 @@ export function mapStationReading(raw: RawStationReading): StationReading {
   };
 }
 
-export function mapDailyTemperatures(rows: RawDailyTemperatures[]): DailyTemperatures[] {
+export function mapDailyHistory(rows: RawDailyHistory[]): DailyHistory[] {
   return rows
     .map((row) => ({
       date: parseLocalDateTime(row.timestamp),
       min: toNumber(row.min_temp),
       med: toNumber(row.med_temp),
       max: toNumber(row.max_temp),
+      rain: toNumber(row.daily_rain),
     }))
-    .filter((row): row is DailyTemperatures => row.date !== null);
+    .filter((row): row is DailyHistory => row.date !== null);
 }

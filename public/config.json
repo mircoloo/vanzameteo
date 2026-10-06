@@ -14,6 +14,7 @@
   },
   "webcam": {
     "url": "https://vanzameteo.altervista.org/foicam/294e31d58d34c6b8/webcam.jpg",
-    "refreshSeconds": 60
+    "refreshSeconds": 60,
+    "slideshowUrl": "/foicam/areaprivata/video.php?code=294e31d58d34c6b8"
   }
 }
