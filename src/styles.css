@@ -1,21 +1,56 @@
-/* You can add global styles to this file, and also import other style files */
+/* Stili globali: tema scuro con accento giallo (Bootstrap 5, data-bs-theme="dark"). */
 
+:root {
+  --vm-accent: #ffd700;
+  --vm-accent-rgb: 255, 215, 0;
+  --vm-card-bg: #151515;
+  --vm-card-border: #2a2a2a;
+}
 
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #0b0b0b;
+}
 
-.card-glow {
-  background-color: #111;
-  border: 1px solid #333;
+app-root {
+  display: contents;
+}
 
-  box-shadow:
-    0 0 10px rgba(255, 215, 0, 0.4),
-    0 0 25px rgba(255, 215, 0, 0.2);
+a {
+  color: var(--vm-accent);
 }
 
 .card-dark {
-  background-color: #151515;
-  border: 1px solid #2a2a2a;
+  background-color: var(--vm-card-bg);
+  border: 1px solid var(--vm-card-border);
   color: #f5f5f5;
+  box-shadow: 0 0 15px rgba(var(--vm-accent-rgb), 0.15);
+}
 
-  /* ombra gialla */
-  box-shadow: 0 0 15px rgba(255, 215, 0, 0.25);
+.card-glow {
+  box-shadow:
+    0 0 10px rgba(var(--vm-accent-rgb), 0.35),
+    0 0 25px rgba(var(--vm-accent-rgb), 0.15);
+}
+
+.text-accent {
+  color: var(--vm-accent);
+}
+
+.live-dot {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-right: 0.25rem;
+  border-radius: 50%;
+  background-color: #e53935;
+  animation: vm-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes vm-pulse {
+  50% {
+    opacity: 0.3;
+  }
 }

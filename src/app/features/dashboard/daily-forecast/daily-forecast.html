@@ -1,0 +1,28 @@
+<div class="card card-dark">
+  <div class="card-body">
+    <h2 class="h5 card-title text-body-secondary">Previsioni 7 giorni</h2>
+
+    <ul class="list-unstyled mb-0 forecast">
+      @for (day of days(); track day.date.getTime(); let first = $first) {
+        @let condition = describe(day.weatherCode);
+        <li class="d-flex align-items-center gap-3 py-2">
+          <span class="day text-capitalize">{{ first ? 'Oggi' : (day.date | date: 'EEE d') }}</span>
+          <span class="fs-4" [title]="condition.label" aria-hidden="true">{{
+            condition.icon
+          }}</span>
+          <span class="visually-hidden">{{ condition.label }}</span>
+          <span class="flex-grow-1 small text-body-secondary">
+            @if (day.precipitationSum > 0) {
+              {{ day.precipitationSum | number: '1.0-1' }} mm
+            }
+          </span>
+          <span class="text-nowrap">
+            <span class="text-info">{{ day.temperatureMin | number: '1.0-0' }}°</span>
+            /
+            <span class="text-accent">{{ day.temperatureMax | number: '1.0-0' }}°</span>
+          </span>
+        </li>
+      }
+    </ul>
+  </div>
+</div>
