@@ -38,8 +38,8 @@ const ACCENT = '#ffd700';
   selector: 'app-temperature-chart',
   template: `
     <div class="card card-dark">
-      <div class="card-body">
-        <h2 class="h5 card-title text-body-secondary">Temperatura prossime 24 ore</h2>
+      <div class="card-body d-flex flex-column">
+        <h2 class="h5 card-title text-body-secondary">Previsione prossime 24 ore</h2>
         <div class="chart-box">
           <canvas #canvas aria-label="Grafico temperatura prossime 24 ore" role="img"></canvas>
         </div>
@@ -49,7 +49,8 @@ const ACCENT = '#ffd700';
   styles: `
     .chart-box {
       position: relative;
-      height: 220px;
+      flex: 1;
+      min-height: 220px;
     }
   `,
 })
@@ -99,6 +100,7 @@ export class TemperatureChart {
         maintainAspectRatio: false,
         interaction: { mode: 'index', intersect: false },
         plugins: {
+          legend: { display: false },
           tooltip: { callbacks: { label: (ctx) => `${ctx.parsed.y} °C` } },
         },
         scales: {

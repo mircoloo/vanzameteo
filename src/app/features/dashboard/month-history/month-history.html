@@ -1,0 +1,96 @@
+<div class="card card-dark">
+  <div class="card-body">
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+      <div>
+        <h2 class="h5 mb-0">Ultimo mese</h2>
+        <div class="small text-body-secondary">
+          {{ days()[0].date | date: 'd MMM' }} –
+          {{ days()[days().length - 1].date | date: 'd MMM' }}
+          · stazione di Vanza
+        </div>
+      </div>
+
+      @if (hasRain()) {
+        <div class="btn-group btn-group-sm segmented" role="group" aria-label="Dato da mostrare">
+          <button
+            type="button"
+            class="btn"
+            [class.active]="view() === 'temperature'"
+            [attr.aria-pressed]="view() === 'temperature'"
+            (click)="view.set('temperature')"
+          >
+            Temperature
+          </button>
+          <button
+            type="button"
+            class="btn"
+            [class.active]="view() === 'rain'"
+            [attr.aria-pressed]="view() === 'rain'"
+            (click)="view.set('rain')"
+          >
+            Pioggia
+          </button>
+        </div>
+      }
+    </div>
+
+    <div class="stats mb-3">
+      @if (view() === 'temperature' || !hasRain()) {
+        <div class="stat">
+          <div class="stat-label">Media</div>
+          <div class="stat-value">{{ stats().averageTemperature | number: '1.1-1' }}°</div>
+        </div>
+        @if (stats().highest; as h) {
+          <div class="stat">
+            <div class="stat-label">Massima</div>
+            <div class="stat-value text-max">{{ h.value | number: '1.1-1' }}°</div>
+            <div class="stat-date">{{ h.date | date: 'd MMM' }}</div>
+          </div>
+        }
+        @if (stats().lowest; as l) {
+          <div class="stat">
+            <div class="stat-label">Minima</div>
+            <div class="stat-value text-min">{{ l.value | number: '1.1-1' }}°</div>
+            <div class="stat-date">{{ l.date | date: 'd MMM' }}</div>
+          </div>
+        }
+      } @else {
+        <div class="stat">
+          <div class="stat-label">Totale</div>
+          <div class="stat-value">{{ stats().totalRain | number: '1.0-1' }} mm</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Giorni di pioggia</div>
+          <div class="stat-value">{{ stats().rainyDays }}</div>
+        </div>
+        @if (stats().wettest; as w) {
+          <div class="stat">
+            <div class="stat-label">Giorno più piovoso</div>
+            <div class="stat-value text-min">{{ w.value | number: '1.0-1' }} mm</div>
+            <div class="stat-date">{{ w.date | date: 'd MMM' }}</div>
+          </div>
+        }
+      }
+    </div>
+
+    @if (view() === 'temperature' || !hasRain()) {
+      <div class="legend small mb-2" aria-hidden="true">
+        <span><i class="dot dot-max"></i>Massima</span>
+        <span><i class="dot dot-med"></i>Media</span>
+        <span><i class="dot dot-min"></i>Minima</span>
+      </div>
+    }
+
+    <div class="chart-box">
+      <canvas
+        #canvas
+        role="img"
+        [attr.aria-label]="
+          view() === 'rain'
+            ? 'Pioggia giornaliera dell\'ultimo mese'
+            : 'Temperature giornaliere dell\'ultimo mese'
+        "
+      ></canvas>
+    </div>
+  </div>
+</div>

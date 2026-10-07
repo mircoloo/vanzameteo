@@ -54,3 +54,13 @@ a {
     opacity: 0.3;
   }
 }
+
+/* Riquadri affiancati della dashboard alti uguali. */
+.dashboard-grid > [class*='col-'] > * {
+  display: block;
+  height: 100%;
+}
+
+.dashboard-grid > [class*='col-'] > * > .card {
+  height: 100%;
+}

@@ -2,11 +2,21 @@ name: Deploy su Altervista
 
 # Pubblica la build via FTP su vanzameteo.altervista.org.
 # Secrets richiesti: FTP_SERVER, FTP_USERNAME, FTP_PASSWORD.
-# Variabili opzionali: FTP_SERVER_DIR (default "./"), BASE_HREF (default "/"),
-# DEPLOY_ON_PUSH = "true" per pubblicare automaticamente ad ogni push su dev/angular.
+#
+# Regola: ogni versione va PRIMA in /test/ e solo dopo la verifica nella cartella principale.
+#   - test (predefinita): sottocartella /test/ → https://vanzameteo.altervista.org/test/
+#   - principale: cartella principale del sito (o FTP_SERVER_DIR / BASE_HREF se impostate),
+#     solo con avvio manuale (Actions → Run workflow → principale).
+# Con la variabile DEPLOY_ON_PUSH = "true" ogni push su dev/angular pubblica in /test/.
 
 on:
   workflow_dispatch:
+    inputs:
+      destinazione:
+        description: Dove pubblicare il sito
+        type: choice
+        options: [test, principale]
+        default: test
   push:
     branches: [dev/angular]
 
@@ -19,6 +29,22 @@ jobs:
     if: github.event_name == 'workflow_dispatch' || vars.DEPLOY_ON_PUSH == 'true'
     runs-on: ubuntu-latest
     steps:
+      - name: Scegli la destinazione
+        id: target
+        env:
+          DESTINAZIONE: ${{ inputs.destinazione || 'test' }}
+          SERVER_DIR: ${{ vars.FTP_SERVER_DIR || './' }}
+          BASE_HREF: ${{ vars.BASE_HREF || '/' }}
+        run: |
+          if [ "$DESTINAZIONE" != "principale" ]; then
+            DESTINAZIONE="test"
+            SERVER_DIR="test/"
+            BASE_HREF="/test/"
+          fi
+          echo "server_dir=$SERVER_DIR" >> "$GITHUB_OUTPUT"
+          echo "base_href=$BASE_HREF" >> "$GITHUB_OUTPUT"
+          echo "Destinazione: $DESTINAZIONE (cartella FTP $SERVER_DIR, base href $BASE_HREF)" >> "$GITHUB_STEP_SUMMARY"
+
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
@@ -26,7 +52,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run test:ci
-      - run: npm run build -- --base-href "${{ vars.BASE_HREF || '/' }}"
+      - run: npm run build -- --base-href "${{ steps.target.outputs.base_href }}"
 
       - name: Upload via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
@@ -35,4 +61,4 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: dist/vanzameteo-angular/browser/
-          server-dir: ${{ vars.FTP_SERVER_DIR || './' }}
+          server-dir: ${{ steps.target.outputs.server_dir }}

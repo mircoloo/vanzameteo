@@ -2,17 +2,15 @@
   <div class="hero-overlay">
     <div class="container-md py-4">
       <h1 class="h3 mb-1">{{ config().location.name }}</h1>
-      @if (weather.hasValue()) {
-        <p class="mb-0 text-body-secondary">
-          Aggiornato alle {{ weather.value().current.time | date: 'HH:mm' }}
-        </p>
+      @if (reading()?.time; as time) {
+        <p class="mb-0 text-body-secondary">Aggiornato alle {{ time | date: 'HH:mm' }}</p>
       }
     </div>
   </div>
 </section>
 
 <div class="container-md">
-  @if (weather.error()) {
+  @if (noData()) {
     <div class="alert alert-warning d-flex justify-content-between align-items-center" role="alert">
       <span>Impossibile caricare i dati meteo. Controlla la connessione.</span>
       <button type="button" class="btn btn-sm btn-outline-warning" (click)="reload()">
@@ -21,29 +19,55 @@
     </div>
   }
 
-  <div class="row g-4">
-    <div class="col-lg-5 d-flex flex-column gap-4">
-      @if (weather.hasValue()) {
-        <app-current-conditions [current]="weather.value().current" />
-      } @else if (weather.isLoading()) {
+  <!-- Ordine su mobile: dati attuali, webcam, ultimo mese, prossime 24 ore, previsioni.
+       Su schermi larghi le coppie stanno affiancate. -->
+  <div class="row g-4 dashboard-grid">
+    <div class="col-lg-5">
+      @if (!waitingForStation() && reading(); as current) {
+        <app-current-conditions [reading]="current" [stationUrl]="config().station.infoUrl" />
+      } @else if (!noData()) {
         <div class="card card-dark p-4 placeholder-glow" aria-busy="true">
           <span class="placeholder col-6 mb-3"></span>
           <span class="placeholder col-4 placeholder-lg mb-3"></span>
           <span class="placeholder col-8"></span>
         </div>
       }
+    </div>
 
-      @if (weather.hasValue()) {
+    <div class="col-lg-7">
+      <app-webcam
+        [url]="config().webcam.url"
+        [refreshSeconds]="config().webcam.refreshSeconds"
+        [slideshowUrl]="config().webcam.slideshowUrl"
+      />
+    </div>
+
+    @if (history.hasValue() && history.value().length > 1) {
+      <div class="col-12">
+        <app-month-history [days]="history.value()" />
+      </div>
+    } @else if (history.status() === 'error' || history.status() === 'resolved') {
+      <div class="col-12">
+        <div class="card card-dark">
+          <div class="card-body small text-body-secondary">
+            <strong class="text-body">Ultimo mese:</strong>
+            @if (history.error()) {
+              lo storico della stazione non è disponibile al momento.
+            } @else {
+              non ci sono ancora abbastanza giorni registrati per il grafico.
+            }
+          </div>
+        </div>
+      </div>
+    }
+
+    @if (weather.hasValue()) {
+      <div class="col-lg-5">
         <app-temperature-chart [points]="weather.value().hourly" />
-      }
-    </div>
-
-    <div class="col-lg-7 d-flex flex-column gap-4">
-      <app-webcam [url]="config().webcam.url" [refreshSeconds]="config().webcam.refreshSeconds" />
-
-      @if (weather.hasValue()) {
+      </div>
+      <div class="col-lg-7">
         <app-daily-forecast [days]="weather.value().daily" />
-      }
-    </div>
+      </div>
+    }
   </div>
 </div>

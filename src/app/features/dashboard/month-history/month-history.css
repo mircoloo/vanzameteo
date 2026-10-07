@@ -1,0 +1,91 @@
+.chart-box {
+  position: relative;
+  height: 260px;
+}
+
+.segmented .btn {
+  color: #aaa;
+  border: 1px solid var(--vm-card-border);
+}
+
+.segmented .btn.active {
+  color: #111;
+  background-color: var(--vm-accent);
+  border-color: var(--vm-accent);
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+
+.stat {
+  padding: 0.6rem 0.8rem;
+  border-radius: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: #8a8a8a;
+}
+
+.stat-value {
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.stat-date {
+  font-size: 0.75rem;
+  color: #8a8a8a;
+}
+
+.text-max {
+  color: #f43f5e;
+}
+
+.text-min {
+  color: #38bdf8;
+}
+
+.legend {
+  display: flex;
+  gap: 1rem;
+  color: #aaa;
+}
+
+.dot {
+  display: inline-block;
+  width: 0.55rem;
+  height: 0.55rem;
+  margin-right: 0.35rem;
+  border-radius: 50%;
+}
+
+.dot-max {
+  background-color: #f43f5e;
+}
+
+.dot-med {
+  background-color: #ffd700;
+}
+
+.dot-min {
+  background-color: #38bdf8;
+}
+
+@media (max-width: 575.98px) {
+  .stats {
+    gap: 0.5rem;
+  }
+
+  .stat {
+    padding: 0.5rem 0.6rem;
+  }
+
+  .stat-value {
+    font-size: 1.05rem;
+  }
+}
