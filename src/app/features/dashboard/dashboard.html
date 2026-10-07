@@ -19,8 +19,10 @@
     </div>
   }
 
-  <div class="row g-4">
-    <div class="col-lg-5 d-flex flex-column gap-4">
+  <!-- Ordine su mobile: dati attuali, webcam, andamento temperatura, previsioni, ultimo mese.
+       Su schermi larghi le coppie stanno affiancate. -->
+  <div class="row g-4 dashboard-grid">
+    <div class="col-lg-5">
       @if (!waitingForStation() && reading(); as current) {
         <app-current-conditions [reading]="current" [stationUrl]="config().station.infoUrl" />
       } @else if (!noData()) {
@@ -30,23 +32,24 @@
           <span class="placeholder col-8"></span>
         </div>
       }
-
-      @if (weather.hasValue()) {
-        <app-temperature-chart [points]="weather.value().hourly" />
-      }
     </div>
 
-    <div class="col-lg-7 d-flex flex-column gap-4">
+    <div class="col-lg-7">
       <app-webcam
         [url]="config().webcam.url"
         [refreshSeconds]="config().webcam.refreshSeconds"
         [slideshowUrl]="config().webcam.slideshowUrl"
       />
-
-      @if (weather.hasValue()) {
-        <app-daily-forecast [days]="weather.value().daily" />
-      }
     </div>
+
+    @if (weather.hasValue()) {
+      <div class="col-lg-5">
+        <app-temperature-chart [points]="weather.value().hourly" />
+      </div>
+      <div class="col-lg-7">
+        <app-daily-forecast [days]="weather.value().daily" />
+      </div>
+    }
 
     @if (history.hasValue() && history.value().length > 1) {
       <div class="col-12">
