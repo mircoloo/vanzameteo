@@ -19,7 +19,7 @@
     </div>
   }
 
-  <!-- Ordine su mobile: dati attuali, webcam, andamento temperatura, previsioni, ultimo mese.
+  <!-- Ordine su mobile: dati attuali, webcam, ultimo mese, prossime 24 ore, previsioni.
        Su schermi larghi le coppie stanno affiancate. -->
   <div class="row g-4 dashboard-grid">
     <div class="col-lg-5">
@@ -42,15 +42,6 @@
       />
     </div>
 
-    @if (weather.hasValue()) {
-      <div class="col-lg-5">
-        <app-temperature-chart [points]="weather.value().hourly" />
-      </div>
-      <div class="col-lg-7">
-        <app-daily-forecast [days]="weather.value().daily" />
-      </div>
-    }
-
     @if (history.hasValue() && history.value().length > 1) {
       <div class="col-12">
         <app-month-history [days]="history.value()" />
@@ -67,6 +58,15 @@
             }
           </div>
         </div>
+      </div>
+    }
+
+    @if (weather.hasValue()) {
+      <div class="col-lg-5">
+        <app-temperature-chart [points]="weather.value().hourly" />
+      </div>
+      <div class="col-lg-7">
+        <app-daily-forecast [days]="weather.value().daily" />
       </div>
     }
   </div>
